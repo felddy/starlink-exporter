@@ -1,5 +1,6 @@
-proto/
-dist/
-make.sh
-README.md
-.gitignore
+.git
+.github
+.mypy_cache
+.pytest_cache
+.python-version
+
