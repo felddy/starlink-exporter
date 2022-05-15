@@ -1,150 +1,186 @@
-<p align="center">
-  <img alt="logo" src="https://github.com/danopstech/starlink_exporter/raw/main/.docs/assets/logo.jpg" height="150" />
-  <h3 align="center">Starlink Prometheus Exporter</h3>
-</p>
+# starlink-exporter ⭐️🔗🐳 #
 
----
-A [Starlink](https://www.starlink.com/) exporter for Prometheus. Not affiliated with or acting on behalf of Starlink(™)
+[![GitHub Build Status](https://github.com/felddy/starlink-exporter/workflows/build/badge.svg)](https://github.com/felddy/starlink-exporter/actions/workflows/build.yml)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/x/badge)](https://bestpractices.coreinfrastructure.org/projects/x)
+[![CodeQL](https://github.com/felddy/starlink-exporter/workflows/CodeQL/badge.svg)](https://github.com/felddy/starlink-exporter/actions/workflows/codeql-analysis.yml)
+[![Known Vulnerabilities](https://snyk.io/test/github/felddy/starlink-exporter/badge.svg)](https://snyk.io/test/github/felddy/starlink-exporter)
+[![License](https://img.shields.io/github/license/felddy/starlink-exporter)](/LICENSE)
+[![Release](https://img.shields.io/github/release/felddy/starlink-exporter.svg)](https://github.com/felddy/starlink-exporter/releases/latest)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/felddy/starlink-exporter)
+[![Go Report Card](https://goreportcard.com/badge/github.com/felddy/starlink-exporter)](https://goreportcard.com/report/github.com/felddy/starlink-exporter)
 
-[![goreleaser](https://github.com/danopstech/starlink_exporter/actions/workflows/release.yaml/badge.svg)](https://github.com/danopstech/starlink_exporter/actions/workflows/release.yaml)
-[![build](https://github.com/danopstech/starlink_exporter/actions/workflows/build.yaml/badge.svg)](https://github.com/danopstech/starlink_exporter/actions/workflows/build.yaml)
-[![License](https://img.shields.io/github/license/danopstech/starlink_exporter)](/LICENSE)
-[![Release](https://img.shields.io/github/release/danopstech/starlink_exporter.svg)](https://github.com/danopstech/starlink_exporter/releases/latest)
-![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/danopstech/starlink_exporter)
-![os/arch](https://img.shields.io/badge/os%2Farch-amd64-yellow)
-![os/arch](https://img.shields.io/badge/os%2Farch-arm64-yellow)
-![os/arch](https://img.shields.io/badge/os%2Farch-armv7-yellow)
-[![Go Report Card](https://goreportcard.com/badge/github.com/danopstech/starlink_exporter)](https://goreportcard.com/report/github.com/danopstech/starlink_exporter)
+## Docker Image ##
 
-If you would like a pre-packaged system to monitor you Starlink system please check out https://github.com/danopstech/starlink. It includes this exporter, speedtest_exporter, blackbox_exporter, Grafana and Prometheus in one Docker Compose file.
+[![Docker Pulls](https://img.shields.io/docker/pulls/felddy/starlink-exporter)](https://hub.docker.com/r/felddy/starlink-exporter)
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/felddy/starlink-exporter)](https://hub.docker.com/r/felddy/starlink-exporter)
+[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/felddy/starlink-exporter/tags)
 
-## Usage:
+A [Starlink](https://www.starlink.com/) exporter for Prometheus.
 
-### Flags
+## Running ##
 
-`starlink_exporter` is configured through the use of optional command line flags
+### Running with Docker ###
 
-```bash
-$ ./starlink_exporter --help
-Usage of starlink_exporter
-  -address string
-        IP address and port to reach dish (default "192.168.100.1:9200")
-  -port string
-        listening port to expose metrics on (default "9817")
+To run the `felddy/starlink-exporter` image via Docker:
 
+```console
+docker run felddy/starlink-exporter:0.0.1
 ```
 
-### Binaries
+### Running with Docker Compose ###
 
-For pre-built binaries please take a look at the [releases](https://github.com/danopstech/starlink_exporter/releases).
+1. Create a `docker-compose.yml` file similar to the one below to use [Docker Compose](https://docs.docker.com/compose/).
 
-```bash
-./starlink_exporter [flags]
+    ```yaml
+    ---
+    version: "3.7"
+
+    services:
+      starlink-exporter:
+        image: felddy/starlink-exporter:0.0.1
+       ports:
+          - target: 9817
+            published: 9817
+            protocol: tcp
+    ```
+
+1. Start the container and detach:
+
+    ```console
+    docker-compose up --detach
+    ```
+
+## Updating your container ##
+
+### Docker Compose ###
+
+1. Pull the new image from Docker Hub:
+
+    ```console
+    docker-compose pull
+    ```
+
+1. Recreate the running container by following the [previous instructions](#running-with-docker-compose):
+
+    ```console
+    docker-compose up --detach
+    ```
+
+### Docker ###
+
+1. Stop the running container:
+
+    ```console
+    docker stop <container_id>
+    ```
+
+1. Pull the new image:
+
+    ```console
+    docker pull felddy/starlink-exporter:0.0.1
+    ```
+
+1. Recreate and run the container by following the [previous instructions](#running-with-docker).
+
+## Image tags ##
+
+The images of this container are tagged with [semantic
+versions](https://semver.org) of the underlying starlink-exporter project that they
+containerize.  It is recommended that most users use a version tag (e.g.
+`:0.0.1`).
+
+| Image:tag | Description |
+|-----------|-------------|
+|`felddy/starlink-exporter:1.2.3`| An exact release version. |
+|`felddy/starlink-exporter:1.2`| The most recent release matching the major and minor version numbers. |
+|`felddy/starlink-exporter:1`| The most recent release matching the major version number. |
+|`felddy/starlink-exporter:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
+|`felddy/starlink-exporter:nightly` | A nightly build of the `develop` branch of this repository. |
+|`felddy/starlink-exporter:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
+
+See the [tags tab](https://hub.docker.com/r/felddy/starlink-exporter/tags) on Docker
+Hub for a list of all the supported tags.
+
+## Volumes ##
+
+None
+
+## Ports ##
+
+The following ports are exposed by this container:
+
+| Port | Purpose        |
+|------|----------------|
+| 9817 | Prometheus web target |
+
+The sample [Docker composition](docker-compose.yml) publishes the
+exposed port at 9817.
+
+## Environment variables ##
+
+### Required ###
+
+There are no required environment variables.
+
+### Optional ###
+
+There are no optional environment variables.
+
+## Secrets ##
+
+There are no secrets.
+
+## Building from source ##
+
+Build the image locally using this git repository as the [build context](https://docs.docker.com/engine/reference/commandline/build/#git-repositories):
+
+```console
+docker build \
+  --build-arg VERSION=0.0.1 \
+  --tag felddy/starlink-exporter:0.0.1 \
+  https://github.com/felddy/starlink-exporter.git#develop
 ```
 
-### Docker
+## Cross-platform builds ##
 
-Docker Images can be found at [GitHub Container Registry](https://github.com/orgs/danopstech/packages/container/package/starlink_exporter) & [Dockerhub](https://hub.docker.com/r/danopstech/starlink_exporter).
+To create images that are compatible with other platforms, you can use the
+[`buildx`](https://docs.docker.com/buildx/working-with-buildx/) feature of
+Docker:
 
-Example:
-```bash
-docker pull ghcr.io/danopstech/starlink_exporter:latest
+1. Copy the project to your machine using the `Code` button above
+   or the command line:
 
-docker run \
-  -p 9817:9817 \
-  ghcr.io/danopstech/starlink_exporter:latest [flags]
-```
+    ```console
+    git clone https://github.com/felddy/starlink-exporter.git
+    cd starlink-exporter
+    ```
 
-### Setup Prometheus to scrape `starlink_exporter`
+1. Create the `Dockerfile-x` file with `buildx` platform support:
 
-Configure [Prometheus](https://prometheus.io/) to scrape metrics from localhost:9817/metrics
+    ```console
+    ./buildx-dockerfile.sh
+    ```
 
-```yaml
-...
-scrape_configs
-    - job_name: starlink
-      scrape_interval: 3s
-      scrape_timeout:  3s
-      static_configs:
-        - targets: ['localhost:9817']
-...
-```
+1. Build the image using `buildx`:
 
-## Exported Metrics:
+    ```console
+    docker buildx build \
+      --file Dockerfile-x \
+      --platform linux/amd64 \
+      --build-arg VERSION=0.0.1 \
+      --output type=docker \
+      --tag felddy/starlink-exporter:0.0.1 .
+    ```
 
-```text
-# HELP starlink_dish_alert_mast_not_near_vertical Status of mast position
-# TYPE starlink_dish_alert_mast_not_near_vertical gauge
-# HELP starlink_dish_alert_motors_stuck Status of motor stuck
-# TYPE starlink_dish_alert_motors_stuck gauge
-# HELP starlink_dish_alert_slow_eth_speeds Status of ethernet
-# TYPE starlink_dish_alert_slow_eth_speeds gauge
-# HELP starlink_dish_alert_thermal_shutdown Status of thermal shutdown
-# TYPE starlink_dish_alert_thermal_shutdown gauge
-# HELP starlink_dish_alert_thermal_throttle Status of thermal throttling
-# TYPE starlink_dish_alert_thermal_throttle gauge
-# HELP starlink_dish_alert_unexpected_location Status of location
-# TYPE starlink_dish_alert_unexpected_location gauge
-# HELP starlink_dish_backup_beam connected to backup beam
-# TYPE starlink_dish_backup_beam gauge
-# HELP starlink_dish_bore_sight_azimuth_deg azimuth in degrees
-# TYPE starlink_dish_bore_sight_azimuth_deg gauge
-# HELP starlink_dish_bore_sight_elevation_deg elevation in degrees
-# TYPE starlink_dish_bore_sight_elevation_deg gauge
-# HELP starlink_dish_cell_id Cell ID dish is located in
-# TYPE starlink_dish_cell_id gauge
-# HELP starlink_dish_currently_obstructed Status of view of the sky
-# TYPE starlink_dish_currently_obstructed gauge
-# HELP starlink_dish_downlink_throughput_bytes Amount of bandwidth in bytes per second download
-# TYPE starlink_dish_downlink_throughput_bytes gauge
-# HELP starlink_dish_first_nonempty_slot_seconds Seconds to next non empty slot
-# TYPE starlink_dish_first_nonempty_slot_seconds gauge
-# HELP starlink_dish_fraction_obstruction_ratio Percentage of obstruction
-# TYPE starlink_dish_fraction_obstruction_ratio gauge
-# HELP starlink_dish_info Running software versions and IDs of hardware
-# TYPE starlink_dish_info gauge
-# HELP starlink_dish_initial_gateway_id initial gateway id
-# TYPE starlink_dish_initial_gateway_id gauge
-# HELP starlink_dish_initial_satellite_id initial satellite id
-# TYPE starlink_dish_initial_satellite_id gauge
-# HELP starlink_dish_last_24h_obstructed_seconds Number of seconds view of sky has been obstructed in the last 24hours
-# TYPE starlink_dish_last_24h_obstructed_seconds gauge
-# HELP starlink_dish_pop_ping_drop_ratio Percent of pings dropped
-# TYPE starlink_dish_pop_ping_drop_ratio gauge
-# HELP starlink_dish_pop_ping_latency_seconds Latency of connection in seconds
-# TYPE starlink_dish_pop_ping_latency_seconds gauge
-# HELP starlink_dish_pop_rack_id pop rack id
-# TYPE starlink_dish_pop_rack_id gauge
-# HELP starlink_dish_prolonged_obstruction_duration_seconds Average in seconds of prolonged obstructions
-# TYPE starlink_dish_prolonged_obstruction_duration_seconds gauge
-# HELP starlink_dish_prolonged_obstruction_interval_seconds Average prolonged obstruction interval in seconds
-# TYPE starlink_dish_prolonged_obstruction_interval_seconds gauge
-# HELP starlink_dish_scrape_duration_seconds Time to scrape metrics from starlink dish
-# TYPE starlink_dish_scrape_duration_seconds gauge
-# HELP starlink_dish_snr Signal strength of the connection
-# TYPE starlink_dish_snr gauge
-# HELP starlink_dish_state The current dishState of the Dish (Unknown, Booting, Searching, Connected).
-# TYPE starlink_dish_state gauge
-# HELP starlink_dish_time_to_slot_end_seconds Seconds left on current slot
-# TYPE starlink_dish_time_to_slot_end_seconds gauge
-# HELP starlink_dish_up Was the last query of Starlink dish successful.
-# TYPE starlink_dish_up gauge
-# HELP starlink_dish_uplink_throughput_bytes Amount of bandwidth in bytes per second upload
-# TYPE starlink_dish_uplink_throughput_bytes gauge
-# HELP starlink_dish_uptime_seconds Dish running time
-# TYPE starlink_dish_uptime_seconds gauge
-# HELP starlink_dish_valid_seconds Unknown
-# TYPE starlink_dish_valid_seconds gauge
-# HELP starlink_dish_wedge_abs_fraction_obstruction_ratio Percentage of Absolute fraction per wedge section
-# TYPE starlink_dish_wedge_abs_fraction_obstruction_ratio gauge
-# HELP starlink_dish_wedge_fraction_obstruction_ratio Percentage of obstruction per wedge section
-# TYPE starlink_dish_wedge_fraction_obstruction_ratio gauge
-```
+## Contributing ##
 
-## Example Grafana Dashboard:
+We welcome contributions!  Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for
+details.
 
-https://grafana.com/grafana/dashboards/14337
+## License ##
 
-<p align="center">
-	<img src="https://github.com/danopstech/starlink_exporter/raw/main/.docs/assets/screenshot.jpg" width="95%">
-</p>
+This project is released as open source under the [GPLv3](LICENSE).
+
+All contributions to this project will be released under the same GPLv3 license.
+By submitting a pull request, you are agreeing to comply with this waiver of
+copyright interest.
