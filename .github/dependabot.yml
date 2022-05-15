@@ -1,20 +1,17 @@
+---
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "daily"
-    assignees:
-      - "dwillcocks"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "daily"
-    assignees:
-      - "dwillcocks"
-  - package-ecosystem: "gomod"
+
+  - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
-    assignees:
-      - "dwillcocks"
+
+  - package-ecosystem: "gomod"
+    directory: "src"
+    schedule:
+      interval: "daily"
