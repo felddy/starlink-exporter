@@ -7,12 +7,14 @@ WORKDIR /app
 
 COPY src ./
 
-RUN go build -o /starlink-exporter cmd/starlink-exporter/main.go
+# Build a static binary
+RUN go build -ldflags '-linkmode external -extldflags "-static"' \
+    -o /starlink-exporter cmd/starlink-exporter/main.go
 
 ##
 ## Deploy
 ##
-FROM gcr.io/distroless/base-debian11
+FROM alpine:3.15.4
 
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
@@ -25,7 +27,5 @@ WORKDIR /
 COPY --from=build /starlink-exporter /starlink-exporter
 
 EXPOSE 9817
-
-USER nonroot:nonroot
 
 ENTRYPOINT ["/starlink-exporter"]
