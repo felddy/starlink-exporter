@@ -10,7 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	status "github.com/felddy/starlink_exporter/pkg/spacex.com/api/status"
+	status "github.com/felddy/starlink-exporter/pkg/spacex.com/api/status"
 	sync "sync"
 )
 

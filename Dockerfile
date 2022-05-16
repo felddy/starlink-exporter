@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY src ./
 
-RUN go build -o /starlink_exporter cmd/starlink_exporter/main.go
+RUN go build -o /starlink-exporter cmd/starlink-exporter/main.go
 
 ##
 ## Deploy
@@ -22,10 +22,10 @@ LABEL org.opencontainers.image.vendor="Geekpad"
 
 WORKDIR /
 
-COPY --from=build /starlink_exporter /starlink_exporter
+COPY --from=build /starlink-exporter /starlink-exporter
 
 EXPOSE 9817
 
 USER nonroot:nonroot
 
-ENTRYPOINT ["/starlink_exporter"]
+ENTRYPOINT ["/starlink-exporter"]

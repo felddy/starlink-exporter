@@ -3,19 +3,20 @@
 package main
 
 import (
-	flag "github.com/spf13/pflag"
 	"fmt"
 	"net/http"
 
+	flag "github.com/spf13/pflag"
+
+	"github.com/felddy/starlink-exporter/internal/exporter"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
-	"github.com/felddy/starlink_exporter/internal/exporter"
 )
 
 const (
 	metricsPath = "/metrics"
-	version = "0.0.1"
+	version     = "0.0.1"
 )
 
 func main() {
