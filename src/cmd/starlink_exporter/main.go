@@ -21,7 +21,7 @@ const (
 func main() {
 	port := flag.String("port", "9817", "listening port to expose metrics on")
 	address := flag.String("address", exporter.DishAddress, "IP address and port to reach dish")
-	version_flag := flag.Bool("version", true, "Print version and exit")
+	version_flag := flag.Bool("version", false, "Print version and exit")
 	flag.Parse()
 
 	if *version_flag {
