@@ -37,7 +37,7 @@ protoc --descriptor_set_in="${PROTOSET}" --go_out="${GEN_DIR}" --go-grpc_out="${
 protoc --descriptor_set_in="${PROTOSET}" --go_out="${GEN_DIR}" --go-grpc_out="${GEN_DIR}" spacex/api/device/wifi.proto
 
 # Find all go files and replace import path with import path in this project
-find "${GEN_DIR}" -name "*.go" -exec sed -i '' -e 's|spacex.com/api|github.com/felddy/starlink_exporter/pkg/spacex.com/api|g' {} \;
+find "${GEN_DIR}" -name "*.go" -exec sed -i '' -e 's|spacex.com/api|github.com/felddy/starlink-exporter/pkg/spacex.com/api|g' {} \;
 
 # Remove unneeded protoset
 rm "${PROTOSET}"
