@@ -7,8 +7,6 @@ WORKDIR /app
 
 COPY src ./
 
-RUN go mod tidy
-
 RUN go build -o /starlink_exporter cmd/starlink_exporter/main.go
 
 ##
