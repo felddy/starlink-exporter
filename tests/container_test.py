@@ -10,10 +10,7 @@ import pytest
 
 ENV_VAR = "ECHO_MESSAGE"
 ENV_VAR_VAL = "Hello World from docker-compose!"
-READY_MESSAGE = "This is a debug message"
-SECRET_QUOTE = (
-    "There are no secrets better kept than the secrets everybody guesses."  # nosec
-)
+READY_MESSAGE = "context deadline exceeded"
 RELEASE_TAG = os.getenv("RELEASE_TAG")
 VERSION_FILE = "src/version.txt"
 
@@ -42,17 +39,11 @@ def test_wait_for_ready(main_container):
 
 def test_wait_for_exits(main_container, version_container):
     """Wait for containers to exit."""
-    assert main_container.wait() == 0, "Container service (main) did not exit cleanly"
+    # Expect the main container to exit with an error since we have no Dishy for it.
+    assert main_container.wait() == 1, "Container service (main) did not exit cleanly"
     assert (
         version_container.wait() == 0
     ), "Container service (version) did not exit cleanly"
-
-
-def test_output(main_container):
-    """Verify the container had the correct output."""
-    main_container.wait()  # make sure container exited if running test isolated
-    log_output = main_container.logs().decode("utf-8")
-    assert SECRET_QUOTE in log_output, "Secret not found in log output."
 
 
 @pytest.mark.skipif(
@@ -82,6 +73,12 @@ def test_log_version(version_container):
     ), f"Container version output to log does not match project version file {VERSION_FILE}"
 
 
+# The container version label is added during the GitHub Actions build workflow.
+# It will not be present if the container is built locally.
+# Skip this check if we are not running in GitHub Actions.
+@pytest.mark.skipif(
+    os.environ.get("GITHUB_ACTIONS") != "true", reason="not running in GitHub Actions"
+)
 def test_container_version_label_matches(version_container):
     """Verify the container version label is the correct version."""
     pkg_vars = {}
@@ -90,4 +87,4 @@ def test_container_version_label_matches(version_container):
     project_version = pkg_vars["__version__"]
     assert (
         version_container.labels["org.opencontainers.image.version"] == project_version
-    ), "Dockerfile version label does not match project version"
+    ), "Container version label does not match project version"

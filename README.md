@@ -1,30 +1,30 @@
-# starlink-exporter 💀🐳 #
+# starlink-exporter ⭐️🔗🐳 #
 
-[![GitHub Build Status](https://github.com/cisagov/starlink-exporter/workflows/build/badge.svg)](https://github.com/cisagov/starlink-exporter/actions/workflows/build.yml)
-[![CodeQL](https://github.com/cisagov/starlink-exporter/workflows/CodeQL/badge.svg)](https://github.com/cisagov/starlink-exporter/actions/workflows/codeql-analysis.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/cisagov/starlink-exporter/badge.svg)](https://snyk.io/test/github/cisagov/starlink-exporter)
+[![GitHub Build Status](https://github.com/felddy/starlink-exporter/workflows/build/badge.svg)](https://github.com/felddy/starlink-exporter/actions/workflows/build.yml)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/x/badge)](https://bestpractices.coreinfrastructure.org/projects/x)
+[![CodeQL](https://github.com/felddy/starlink-exporter/workflows/CodeQL/badge.svg)](https://github.com/felddy/starlink-exporter/actions/workflows/codeql-analysis.yml)
+[![Known Vulnerabilities](https://snyk.io/test/github/felddy/starlink-exporter/badge.svg)](https://snyk.io/test/github/felddy/starlink-exporter)
+[![License](https://img.shields.io/github/license/felddy/starlink-exporter)](/LICENSE)
+[![Release](https://img.shields.io/github/release/felddy/starlink-exporter.svg)](https://github.com/felddy/starlink-exporter/releases/latest)
+![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/felddy/starlink-exporter)
+[![Go Report Card](https://goreportcard.com/badge/github.com/felddy/starlink-exporter)](https://goreportcard.com/report/github.com/felddy/starlink-exporter)
 
 ## Docker Image ##
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/example)](https://hub.docker.com/r/cisagov/example)
-[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/example)](https://hub.docker.com/r/cisagov/example)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/starlink-exporter/tags)
+[![Docker Pulls](https://img.shields.io/docker/pulls/felddy/starlink-exporter)](https://hub.docker.com/r/felddy/starlink-exporter)
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/felddy/starlink-exporter)](https://hub.docker.com/r/felddy/starlink-exporter)
+[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/felddy/starlink-exporter/tags)
 
-This is a Docker skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub Docker project
-started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit hooks](https://pre-commit.com)
-and [GitHub Actions](https://github.com/features/actions) configurations
-appropriate for Docker containers and the major languages that we use.
+A [Starlink](https://www.starlink.com/) exporter for Prometheus.
 
 ## Running ##
 
 ### Running with Docker ###
 
-To run the `cisagov/example` image via Docker:
+To run the `felddy/starlink-exporter` image via Docker:
 
 ```console
-docker run cisagov/example:0.0.1
+docker run felddy/starlink-exporter:0.0.1
 ```
 
 ### Running with Docker Compose ###
@@ -36,17 +36,11 @@ docker run cisagov/example:0.0.1
     version: "3.7"
 
     services:
-      example:
-        image: cisagov/example:0.0.1
-        volumes:
-          - type: bind
-            source: <your_log_dir>
-            target: /var/log
-        environment:
-          - ECHO_MESSAGE="Hello from docker-compose"
-        ports:
-          - target: 8080
-            published: 8080
+      starlink-exporter:
+        image: felddy/starlink-exporter:0.0.1
+       ports:
+          - target: 9817
+            published: 9817
             protocol: tcp
     ```
 
@@ -54,48 +48,6 @@ docker run cisagov/example:0.0.1
 
     ```console
     docker-compose up --detach
-    ```
-
-## Using secrets with your container ##
-
-This container also supports passing sensitive values via [Docker
-secrets](https://docs.docker.com/engine/swarm/secrets/).  Passing sensitive
-values like your credentials can be more secure using secrets than using
-environment variables.  See the
-[secrets](#secrets) section below for a table of all supported secret files.
-
-1. To use secrets, create a `quote.txt` file containing the values you want set:
-
-    ```text
-    Better lock it in your pocket.
-    ```
-
-1. Then add the secret to your `docker-compose.yml` file:
-
-    ```yaml
-    ---
-    version: "3.7"
-
-    secrets:
-      quote_txt:
-        file: quote.txt
-
-    services:
-      example:
-        image: cisagov/example:0.0.1
-        volumes:
-          - type: bind
-            source: <your_log_dir>
-            target: /var/log
-        environment:
-          - ECHO_MESSAGE="Hello from docker-compose"
-        ports:
-          - target: 8080
-            published: 8080
-            protocol: tcp
-        secrets:
-          - source: quote_txt
-            target: quote.txt
     ```
 
 ## Updating your container ##
@@ -125,7 +77,7 @@ environment variables.  See the
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/example:0.0.1
+    docker pull felddy/starlink-exporter:0.0.1
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
@@ -133,27 +85,25 @@ environment variables.  See the
 ## Image tags ##
 
 The images of this container are tagged with [semantic
-versions](https://semver.org) of the underlying example project that they
+versions](https://semver.org) of the underlying starlink-exporter project that they
 containerize.  It is recommended that most users use a version tag (e.g.
 `:0.0.1`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/example:1.2.3`| An exact release version. |
-|`cisagov/example:1.2`| The most recent release matching the major and minor version numbers. |
-|`cisagov/example:1`| The most recent release matching the major version number. |
-|`cisagov/example:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
-|`cisagov/example:nightly` | A nightly build of the `develop` branch of this repository. |
-|`cisagov/example:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
+|`felddy/starlink-exporter:1.2.3`| An exact release version. |
+|`felddy/starlink-exporter:1.2`| The most recent release matching the major and minor version numbers. |
+|`felddy/starlink-exporter:1`| The most recent release matching the major version number. |
+|`felddy/starlink-exporter:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
+|`felddy/starlink-exporter:nightly` | A nightly build of the `develop` branch of this repository. |
+|`felddy/starlink-exporter:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
 
-See the [tags tab](https://hub.docker.com/r/cisagov/example/tags) on Docker
+See the [tags tab](https://hub.docker.com/r/felddy/starlink-exporter/tags) on Docker
 Hub for a list of all the supported tags.
 
 ## Volumes ##
 
-| Mount point | Purpose        |
-|-------------|----------------|
-| `/var/log`  |  Log storage   |
+None
 
 ## Ports ##
 
@@ -161,10 +111,10 @@ The following ports are exposed by this container:
 
 | Port | Purpose        |
 |------|----------------|
-| 8080 | Example only; nothing is actually listening on the port |
+| 9817 | Prometheus web target |
 
 The sample [Docker composition](docker-compose.yml) publishes the
-exposed port at 8080.
+exposed port at 9817.
 
 ## Environment variables ##
 
@@ -172,23 +122,13 @@ exposed port at 8080.
 
 There are no required environment variables.
 
-<!--
-| Name  | Purpose | Default |
-|-------|---------|---------|
-| `REQUIRED_VARIABLE` | Describe its purpose. | `null` |
--->
-
 ### Optional ###
 
-| Name  | Purpose | Default |
-|-------|---------|---------|
-| `ECHO_MESSAGE` | Sets the message echoed by this container.  | `Hello World from Dockerfile` |
+There are no optional environment variables.
 
 ## Secrets ##
 
-| Filename     | Purpose |
-|--------------|---------|
-| `quote.txt` | Replaces the secret stored in the example library's package data. |
+There are no secrets.
 
 ## Building from source ##
 
@@ -197,8 +137,8 @@ Build the image locally using this git repository as the [build context](https:/
 ```console
 docker build \
   --build-arg VERSION=0.0.1 \
-  --tag cisagov/example:0.0.1 \
-  https://github.com/cisagov/example.git#develop
+  --tag felddy/starlink-exporter:0.0.1 \
+  https://github.com/felddy/starlink-exporter.git#develop
 ```
 
 ## Cross-platform builds ##
@@ -211,8 +151,8 @@ Docker:
    or the command line:
 
     ```console
-    git clone https://github.com/cisagov/example.git
-    cd example
+    git clone https://github.com/felddy/starlink-exporter.git
+    cd starlink-exporter
     ```
 
 1. Create the `Dockerfile-x` file with `buildx` platform support:
@@ -229,15 +169,8 @@ Docker:
       --platform linux/amd64 \
       --build-arg VERSION=0.0.1 \
       --output type=docker \
-      --tag cisagov/example:0.0.1 .
+      --tag felddy/starlink-exporter:0.0.1 .
     ```
-
-## New repositories from a skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
 
 ## Contributing ##
 
@@ -246,13 +179,8 @@ details.
 
 ## License ##
 
-This project is in the worldwide [public domain](LICENSE).
+This project is released as open source under the [GPLv3](LICENSE).
 
-This project is in the public domain within the United States, and
-copyright and related rights in the work worldwide are waived through
-the [CC0 1.0 Universal public domain
-dedication](https://creativecommons.org/publicdomain/zero/1.0/).
-
-All contributions to this project will be released under the CC0
-dedication. By submitting a pull request, you are agreeing to comply
-with this waiver of copyright interest.
+All contributions to this project will be released under the same GPLv3 license.
+By submitting a pull request, you are agreeing to comply with this waiver of
+copyright interest.
