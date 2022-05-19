@@ -66,25 +66,20 @@ setup(
     package_dir={"": "src"},
     py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],
     install_requires=[
-        "docopt",
+        "docopt == 0.6.2",
         "grpcio == 1.46.1",
         "grpcio-tools == 1.46.1",
-        "schema",
-        "setuptools >= 24.2.0",
+        "prometheus-client == 0.14.1",
+        "schema == 0.7.5",
+        "setuptools == 62.3.1",
     ],
     extras_require={
         "test": [
-            "coverage",
-            # coveralls 1.11.0 added a service number for calls from
-            # GitHub Actions. This caused a regression which resulted in a 422
-            # response from the coveralls API with the message:
-            # Unprocessable Entity for url: https://coveralls.io/api/v1/jobs
-            # 1.11.1 fixed this issue, but to ensure expected behavior we'll pin
-            # to never grab the regression version.
-            "coveralls != 1.11.0",
-            "pre-commit",
-            "pytest-cov",
-            "pytest",
+            "coverage == 6.3.3",
+            "coveralls == 3.3.1",
+            "pre-commit == 2.19.0",
+            "pytest-cov == 3.0.0",
+            "pytest == 7.1.2",
         ]
     },
     # Conveniently allows one to run the CLI tool as `example`
