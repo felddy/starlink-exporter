@@ -6,3 +6,4 @@
 from ._version import __version__  # noqa: F401
 
 __all__: list[str] = []
+TIMEOUT: int = 10
