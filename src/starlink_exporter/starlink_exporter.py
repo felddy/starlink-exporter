@@ -30,22 +30,29 @@ from typing import Any, Dict
 # Third-Party Libraries
 import docopt
 import grpc
+from prometheus_client import CollectorRegistry, start_http_server
 from schema import And, Schema, SchemaError, Use
 
-# cisagov Libraries
+# felddy Libraries
+# Generated Libraries
 import spacex.api.device.device_pb2 as pb2
 from spacex.api.device.device_pb2_grpc import DeviceStub
 
+# Project imports
 from ._version import __version__
+from .collector import CustomCollector
 
 
 def run(listen_port: int, dish_address: str) -> None:
     """Connect to the dish using gRPC and print out the device info."""
+
+    registry = CollectorRegistry()
+
     # TODO handle connection errors
     with grpc.insecure_channel(dish_address) as channel:
-        client = DeviceStub(channel)
+        dish_client = DeviceStub(channel)
 
-        status = client.Handle(pb2.Request(get_status={}), timeout=10)
+        status = dish_client.Handle(pb2.Request(get_status={}), timeout=10)
         # history = client.Handle(pb2.Request(get_history={}), timeout=10)
         # obstruction_map = client.Handle(
         #     pb2.Request(dish_get_obstruction_map={}), timeout=10
@@ -58,6 +65,14 @@ def run(listen_port: int, dish_address: str) -> None:
         logging.info(
             f"Hardware version: f{status.dish_get_status.device_info.hardware_version}"
         )
+
+        # Create custom collector
+        logging.debug("Creating custom collector.")
+        collector = CustomCollector(dish_client)
+        registry.register(collector)
+
+        logging.info(f"Starting http server on port {listen_port}")
+        start_http_server(listen_port, registry=registry)
 
         # Drop into an IPython shell
         # Third-Party Libraries

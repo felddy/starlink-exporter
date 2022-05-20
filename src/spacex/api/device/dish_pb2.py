@@ -15,7 +15,7 @@ from google.protobuf.internal import enum_type_wrapper
 _sym_db = _symbol_database.Default()
 
 
-# cisagov Libraries
+# felddy Libraries
 from spacex.api.device import (
     dish_config_pb2 as spacex_dot_api_dot_device_dot_dish__config__pb2,
 )
