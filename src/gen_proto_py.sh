@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script will generate the go source files from the Starlink Disk gRPC reflection.
+# This script will generate the Python source files from the Starlink Dish gRPC reflection.
 
 set -o nounset
 set -o errexit
