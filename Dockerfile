@@ -1,7 +1,7 @@
 ##
 ## Build
 ##
-FROM golang:1.18.2-bullseye AS build
+FROM golang:1.18.4-bullseye AS build
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN go build -ldflags '-linkmode external -extldflags "-static"' \
 ##
 ## Deploy
 ##
-FROM alpine:3.16.0
+FROM alpine:3.16.1
 
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
