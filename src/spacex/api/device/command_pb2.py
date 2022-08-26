@@ -16,7 +16,7 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n\x1fspacex/api/device/command.proto\x12\x11SpaceX.API.Device"`\n\tPublicKey\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x41\n\x0c\x63\x61pabilities\x18\x02 \x03(\x0e\x32\x1d.SpaceX.API.Device.CapabilityR\x0c\x63\x61pabilities*\xbf\x01\n\nCapability\x12\x08\n\x04READ\x10\x00\x12\x11\n\rREAD_INTERNAL\x10\r\x12\x10\n\x0cREAD_PRIVATE\x10\x07\x12\t\n\x05WRITE\x10\x01\x12\x14\n\x10WRITE_PERSISTENT\x10\x0b\x12\t\n\x05\x44\x45\x42UG\x10\x02\x12\t\n\x05\x41\x44MIN\x10\x03\x12\t\n\x05SETUP\x10\x04\x12\x0b\n\x07SET_SKU\x10\x05\x12\x0b\n\x07REFRESH\x10\x06\x12\x08\n\x04\x46USE\x10\x08\x12\t\n\x05RESET\x10\t\x12\x08\n\x04TEST\x10\n\x12\x07\n\x03SSH\x10\x0c\x42\x17Z\x15spacex.com/api/deviceb\x06proto3'
+    b'\n\x1fspacex/api/device/command.proto\x12\x11SpaceX.API.Device"`\n\tPublicKey\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x41\n\x0c\x63\x61pabilities\x18\x02 \x03(\x0e\x32\x1d.SpaceX.API.Device.CapabilityR\x0c\x63\x61pabilities*\xca\x01\n\nCapability\x12\x08\n\x04READ\x10\x00\x12\x11\n\rREAD_INTERNAL\x10\r\x12\x10\n\x0cREAD_PRIVATE\x10\x07\x12\t\n\x05LOCAL\x10\x0e\x12\t\n\x05WRITE\x10\x01\x12\x14\n\x10WRITE_PERSISTENT\x10\x0b\x12\t\n\x05\x44\x45\x42UG\x10\x02\x12\t\n\x05\x41\x44MIN\x10\x03\x12\t\n\x05SETUP\x10\x04\x12\x0b\n\x07SET_SKU\x10\x05\x12\x0b\n\x07REFRESH\x10\x06\x12\x08\n\x04\x46USE\x10\x08\x12\t\n\x05RESET\x10\t\x12\x08\n\x04TEST\x10\n\x12\x07\n\x03SSH\x10\x0c\x42\x17Z\x15spacex.com/api/deviceb\x06proto3'
 )
 
 _CAPABILITY = DESCRIPTOR.enum_types_by_name["Capability"]
@@ -24,6 +24,7 @@ Capability = enum_type_wrapper.EnumTypeWrapper(_CAPABILITY)
 READ = 0
 READ_INTERNAL = 13
 READ_PRIVATE = 7
+LOCAL = 14
 WRITE = 1
 WRITE_PERSISTENT = 11
 DEBUG = 2
@@ -54,7 +55,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
     DESCRIPTOR._options = None
     DESCRIPTOR._serialized_options = b"Z\025spacex.com/api/device"
     _CAPABILITY._serialized_start = 153
-    _CAPABILITY._serialized_end = 344
+    _CAPABILITY._serialized_end = 355
     _PUBLICKEY._serialized_start = 54
     _PUBLICKEY._serialized_end = 150
 # @@protoc_insertion_point(module_scope)

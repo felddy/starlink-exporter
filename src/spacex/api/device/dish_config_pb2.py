@@ -15,12 +15,13 @@ _sym_db = _symbol_database.Default()
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n#spacex/api/device/dish_config.proto\x12\x11SpaceX.API.Device"\xc9\x01\n\nDishConfig\x12P\n\x0esnow_melt_mode\x18\x01 \x01(\x0e\x32*.SpaceX.API.Device.DishConfig.SnowMeltModeR\x0csnowMeltMode\x12\x30\n\x14\x61pply_snow_melt_mode\x18\xe9\x07 \x01(\x08R\x11\x61pplySnowMeltMode"7\n\x0cSnowMeltMode\x12\x08\n\x04\x41UTO\x10\x00\x12\r\n\tALWAYS_ON\x10\x01\x12\x0e\n\nALWAYS_OFF\x10\x02\x42\x17Z\x15spacex.com/api/deviceb\x06proto3'
+    b'\n#spacex/api/device/dish_config.proto\x12\x11SpaceX.API.Device"\x9c\x03\n\nDishConfig\x12P\n\x0esnow_melt_mode\x18\x01 \x01(\x0e\x32*.SpaceX.API.Device.DishConfig.SnowMeltModeR\x0csnowMeltMode\x12\x30\n\x14\x61pply_snow_melt_mode\x18\xe9\x07 \x01(\x08R\x11\x61pplySnowMeltMode\x12\x65\n\x15location_request_mode\x18\x02 \x01(\x0e\x32\x31.SpaceX.API.Device.DishConfig.LocationRequestModeR\x13locationRequestMode\x12>\n\x1b\x61pply_location_request_mode\x18\xd1\x0f \x01(\x08R\x18\x61pplyLocationRequestMode"7\n\x0cSnowMeltMode\x12\x08\n\x04\x41UTO\x10\x00\x12\r\n\tALWAYS_ON\x10\x01\x12\x0e\n\nALWAYS_OFF\x10\x02"*\n\x13LocationRequestMode\x12\x08\n\x04NONE\x10\x00\x12\t\n\x05LOCAL\x10\x01\x42\x17Z\x15spacex.com/api/deviceb\x06proto3'
 )
 
 
 _DISHCONFIG = DESCRIPTOR.message_types_by_name["DishConfig"]
 _DISHCONFIG_SNOWMELTMODE = _DISHCONFIG.enum_types_by_name["SnowMeltMode"]
+_DISHCONFIG_LOCATIONREQUESTMODE = _DISHCONFIG.enum_types_by_name["LocationRequestMode"]
 DishConfig = _reflection.GeneratedProtocolMessageType(
     "DishConfig",
     (_message.Message,),
@@ -37,7 +38,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
     DESCRIPTOR._options = None
     DESCRIPTOR._serialized_options = b"Z\025spacex.com/api/device"
     _DISHCONFIG._serialized_start = 59
-    _DISHCONFIG._serialized_end = 260
-    _DISHCONFIG_SNOWMELTMODE._serialized_start = 205
-    _DISHCONFIG_SNOWMELTMODE._serialized_end = 260
+    _DISHCONFIG._serialized_end = 471
+    _DISHCONFIG_SNOWMELTMODE._serialized_start = 372
+    _DISHCONFIG_SNOWMELTMODE._serialized_end = 427
+    _DISHCONFIG_LOCATIONREQUESTMODE._serialized_start = 429
+    _DISHCONFIG_LOCATIONREQUESTMODE._serialized_end = 471
 # @@protoc_insertion_point(module_scope)
