@@ -1,17 +1,30 @@
 ---
+
 version: 2
 updates:
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "daily"
+    labels:
+      - "bot :robot:"
+      - "dependencies :game_die:"
+      - "docker :whale:"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
+    labels:
+      - "bot :robot:"
+      - "dependencies :game_die:"
+      - "github-actions :octocat:"
 
   - package-ecosystem: "gomod"
     directory: "src"
     schedule:
       interval: "daily"
+    labels:
+      - "bot :robot:"
+      - "dependencies :game_die:"
+      - "go :beaver:"
