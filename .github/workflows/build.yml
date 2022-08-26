@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@74b568e8591fbb3115c70f3436a0c6b0909a8504
+        uses: step-security/harden-runner@dd2c410b088af7c0dc8046f3ac9a8f4148492a95
         with:
           # TODO: change to 'egress-policy: block' after couple of runs
           egress-policy: audit
@@ -54,7 +54,7 @@ jobs:
         uses: cisagov/setup-env-github-action@a1913cd974407cd92d5b015342aa6d28d36539b8
       - uses: actions/checkout@3df53dd32d858478710a6127bcd8b9d8b7182e16
       - id: setup-python
-        uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08
+        uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5
         with:
           python-version: '3.10'
       # We need the Go version and Go cache location for the actions/cache step,
@@ -164,14 +164,14 @@ jobs:
       tags: ${{ steps.prep.outputs.tags }}
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@74b568e8591fbb3115c70f3436a0c6b0909a8504
+        uses: step-security/harden-runner@dd2c410b088af7c0dc8046f3ac9a8f4148492a95
         with:
           # TODO: change to 'egress-policy: block' after couple of runs
           egress-policy: audit
       - uses: actions/checkout@3df53dd32d858478710a6127bcd8b9d8b7182e16
       - name: Gather repository metadata
         id: repo
-        uses: actions/github-script@7f4e771d2b3022fa3b8bac499d4a547619f3ab10
+        uses: actions/github-script@d50f485531ba88479582bc2da03ff424389af5c1
         with:
           script: |
             const repo = await github.rest.repos.get(context.repo)
@@ -238,7 +238,7 @@ jobs:
     needs: [prepare]
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@74b568e8591fbb3115c70f3436a0c6b0909a8504
+        uses: step-security/harden-runner@dd2c410b088af7c0dc8046f3ac9a8f4148492a95
         with:
           # TODO: change to 'egress-policy: block' after couple of runs
           egress-policy: audit
@@ -313,13 +313,13 @@ jobs:
     needs: [build]
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@74b568e8591fbb3115c70f3436a0c6b0909a8504
+        uses: step-security/harden-runner@dd2c410b088af7c0dc8046f3ac9a8f4148492a95
         with:
           # TODO: change to 'egress-policy: block' after couple of runs
           egress-policy: audit
       - uses: actions/checkout@3df53dd32d858478710a6127bcd8b9d8b7182e16
       - id: setup-python
-        uses: actions/setup-python@c4e89fac7e8767b327bbad6cb4d859eda999cf08
+        uses: actions/setup-python@b55428b1882923874294fa556849718a1d7f2ca5
         with:
           python-version: '3.10'
       - name: Cache testing environments
@@ -367,7 +367,7 @@ jobs:
     if: github.event_name != 'pull_request'
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@74b568e8591fbb3115c70f3436a0c6b0909a8504
+        uses: step-security/harden-runner@dd2c410b088af7c0dc8046f3ac9a8f4148492a95
         with:
           # TODO: change to 'egress-policy: block' after couple of runs
           egress-policy: audit
