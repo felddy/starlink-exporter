@@ -14,7 +14,7 @@ RUN go build -ldflags '-linkmode external -extldflags "-static"' \
 ##
 ## Deploy
 ##
-FROM alpine:3.16.2
+FROM alpine:3.16.3
 
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
